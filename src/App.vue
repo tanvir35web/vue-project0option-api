@@ -1,5 +1,11 @@
 <template>
-  <Navbar :pages="pages" />
+  <Navbar
+    :useDarkNavBar="useDarkNavBar"
+    :pages="pages"
+    :activePage="activePage"
+    @toggle-theme="toggleNavBarTheme"
+    :navLinkClick="(index) => (activePage = index)"
+  />
   <PageViewer :page="pages[activePage]" />
 </template>
 
@@ -15,7 +21,8 @@ export default {
 
   data() {
     return {
-      activePage: 2,
+      activePage: 0,
+      useDarkNavBar: false,
       pages: [
         {
           link: { text: 'Home', url: 'index.html' },
@@ -33,6 +40,11 @@ export default {
           content: 'This is the contact content'
         }
       ]
+    }
+  },
+  methods: {
+    toggleNavBarTheme() {
+      this.useDarkNavBar = !this.useDarkNavBar;
     }
   }
 }
